@@ -15,6 +15,7 @@ This is a [CDK TypeScript demo project](https://docs.aws.amazon.com/cdk/v2/guide
 
 ## Other useful commands
 
+- `npx cdk init app --language typescript` create a new CDK project
 - `npm run build` compile typescript to js
 - `npm run watch` watch for changes and compile
 - `npm run test` perform the jest unit tests

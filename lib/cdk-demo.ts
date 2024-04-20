@@ -1,5 +1,5 @@
 import { CloudFrontToS3 } from "@aws-solutions-constructs/aws-cloudfront-s3";
-import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
+import { CfnOutput, Duration, Stack, StackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
 import * as path from "path";
 import { PriceClass } from "aws-cdk-lib/aws-cloudfront";
@@ -12,7 +12,14 @@ export class CdkDemo extends Stack {
     const construct = new CloudFrontToS3(this, "CloudFrontToS3", {
       logS3AccessLogs: false,
       bucketProps: {
+        bucketName: "my-bucket",
         versioned: true,
+        lifecycleRules: [
+          {
+            noncurrentVersionExpiration: Duration.days(1),
+            noncurrentVersionsToRetain: 1,
+          },
+        ],
       },
       cloudFrontDistributionProps: {
         enableLogging: false,
